@@ -17,7 +17,7 @@ const modalBodyEl = document.getElementById('modalBody');
 // Assets Setup
 // ==========================================
 const mapImage = new Image();
-mapImage.src = 'Assets/room.png'; // 192x96 px PNG
+mapImage.src = 'Assets/Room.png'; // 192x96 px PNG
 
 const playerImage = new Image();
 playerImage.src = 'Assets/YCH.png'; // 32x32 px PNG
