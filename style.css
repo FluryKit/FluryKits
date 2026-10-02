@@ -3,58 +3,80 @@
   margin: 0;
   padding: 0;
   user-select: none;
-  /* Prevents double-tap zooming on rapid mobile taps */
   touch-action: manipulation;
 }
 
+/* Warm, Seamless Background */
 body {
-  background-color: #000000;
-  color: #cdd6f4;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1f1b18; /* Dark espresso */
+  color: #f5efeb;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  min-height: 100svh; /* Modern mobile viewport unit */
+  min-height: 100svh;
   overflow: hidden;
 }
 
+/* Cozy Navbar */
 .navbar {
   position: absolute;
   top: 0;
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: #11111b;
-  border-bottom: 1px solid #181825;
+  padding: 12px 18px;
+  background: rgba(35, 30, 26, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #3d352e;
+  border-radius: 0 0 14px 14px;
   z-index: 10;
 }
 
 .room-title {
-  font-weight: bold;
-  font-size: 1rem;
-  color: #cba6f7;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #b3c2ae;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.room-title i {
+  color: #8a9a86;
 }
 
 .quick-links button {
-  background: #1e1e2e;
-  color: #cdd6f4;
-  border: 1px solid #313244;
-  padding: 6px 10px;
-  border-radius: 6px;
+  background: #362f2a;
+  color: #f5efeb;
+  border: 1px solid #4a4038;
+  padding: 7px 12px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 0.8rem;
-  margin-left: 4px;
+  font-weight: 600;
+  margin-left: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quick-links button i {
+  color: #b3c2ae;
 }
 
 .quick-links button:hover {
-  background: #313244;
+  background: #4a4038;
+  border-color: #8a9a86;
+  color: #d1e0cc;
 }
 
+/* Canvas Container - Seamless Blend (No Frame, Border, or Shadow) */
 .game-container {
   position: relative;
   display: flex;
@@ -65,16 +87,15 @@ body {
   padding: 0;
 }
 
-/* Dynamic display: standard 432px on PC, scales up to 90% screen width on mobile */
 #gameCanvas {
   width: 90vw;
   max-width: 432px;
   height: auto;
   aspect-ratio: 1 / 1;
-  max-height: 70vh;
+  max-height: 65vh;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  background: #000000;
+  background: transparent;
   border: none;
   outline: none;
   box-shadow: none;
@@ -83,51 +104,232 @@ body {
 .prompt {
   position: absolute;
   bottom: 16px;
-  background: rgba(0, 0, 0, 0.85);
-  color: #a6e3a1;
-  padding: 8px 14px;
+  background: rgba(35, 30, 26, 0.92);
+  color: #b3c2ae;
+  padding: 8px 16px;
   border-radius: 20px;
-  font-size: 0.8rem;
-  border: 1px solid #a6e3a1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid #8a9a86;
   z-index: 5;
   text-align: center;
   max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prompt i {
+  color: #a6e3a1;
 }
 
 .hidden {
   display: none !important;
 }
 
-/* Modal Styling */
+/* Pop-Out Modal Window */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(15, 12, 10, 0.85);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: 20px;
   z-index: 100;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-content {
-  background: #181825;
-  border: 1px solid #cba6f7;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
+  background: #231e1a;
+  border: 2px solid #8a9a86;
+  padding: 24px;
+  border-radius: 24px;
+  width: 92vw;
+  max-width: 580px;
+  min-height: 380px;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  color: #cdd6f4;
+  color: #f5efeb;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Frameless Floating Pagedoll */
+.pagedoll-floating-wrapper {
+  position: absolute;
+  top: -52px;
+  left: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pagedoll-img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
+  animation: floatPagedoll 3s ease-in-out infinite;
+}
+
+.modal-header {
+  margin-top: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #3d352e;
+}
+
+.modal-header h2 {
+  font-size: 1.35rem;
+  color: #d1e0cc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Book Container & Pages */
+.book-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+}
+
+.book-pages-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-page {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #e6ded8;
+  padding-right: 6px;
+  animation: pageSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.book-page p {
+  margin-bottom: 10px;
+}
+
+/* Custom Scrollbar for pages */
+.book-page::-webkit-scrollbar {
+  width: 5px;
+}
+.book-page::-webkit-scrollbar-track {
+  background: #1a1614;
+  border-radius: 10px;
+}
+.book-page::-webkit-scrollbar-thumb {
+  background: #4a4038;
+  border-radius: 10px;
+}
+
+/* Book Navigation Footer */
+.book-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  margin-top: 10px;
+  border-top: 1px solid #3d352e;
+}
+
+.book-nav button {
+  background: #362f2a;
+  color: #f5efeb;
+  border: 1px solid #4a4038;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.book-nav button:hover:not(:disabled) {
+  background: #4a4038;
+  border-color: #8a9a86;
+  color: #d1e0cc;
+}
+
+.book-nav button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-number {
+  font-size: 0.82rem;
+  color: #8a9a86;
+  font-weight: 600;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  color: #f38ba8;
-  font-size: 1.5rem;
+  top: 16px;
+  right: 18px;
+  background: #362f2a;
+  border: 1px solid #4a4038;
+  color: #e5989b;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.close-btn:hover {
+  background: #4a4038;
+  color: #ffb4a2;
+}
+
+/* Badge styling */
+.badge-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.badge-item {
+  background: #362f2a;
+  border: 1px solid #8a9a86;
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  color: #d1e0cc;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Animations */
+@keyframes floatPagedoll {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes pageSlideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }

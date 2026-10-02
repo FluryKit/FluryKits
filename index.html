@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kovy's Interactive Portfolio</title>
+  <title>FluryKit's Interactive Portfolio</title>
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- Top Navigation Bar -->
   <header class="navbar">
-    <div class="room-title" id="roomTitle">Kovy's Room</div>
+    <div class="room-title" id="roomTitle">
+      <i class="fa-solid fa-leaf"></i> Kovy's Room
+    </div>
     <div class="quick-links">
-      <button onclick="teleportToRoom(1)">Kovy's Room</button>
-      <button onclick="teleportToRoom(2)">Commission Room</button>
+      <button onclick="teleportToRoom(1)">
+        <i class="fa-solid fa-mug-hot"></i> Kovy's Room
+      </button>
+      <button onclick="teleportToRoom(2)">
+        <i class="fa-solid fa-palette"></i> Commissions
+      </button>
     </div>
   </header>
 
@@ -22,17 +31,47 @@
     <canvas id="gameCanvas" width="96" height="96"></canvas>
     
     <!-- Onscreen Interaction Prompt -->
-    <div id="interactionPrompt" class="prompt hidden">Press [E] or Tap to Interact</div>
+    <div id="interactionPrompt" class="prompt hidden">
+      <i class="fa-solid fa-hand-pointer"></i> Press [E] or Tap to Interact
+    </div>
   </main>
 
   <!-- Pop-Up Modal Overlay -->
-  <div id="infoModal" class="modal hidden">
+  <div id="infoModal" class="modal hidden" onclick="if(event.target === this) closeModal()">
     <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">&times;</button>
-      <h2 id="modalTitle">Modal Title</h2>
-      <div id="modalBody">
-        <p>Modal content goes here...</p>
+      
+      <!-- Frameless Floating Pagedoll -->
+      <div class="pagedoll-floating-wrapper">
+        <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/113159491_iyqkZFZRL9knkx0.gif" alt="Pagedoll" class="pagedoll-img">
       </div>
+
+      <button class="close-btn" onclick="closeModal()" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2 id="modalTitle"><i class="fa-solid fa-book-open"></i> About Me</h2>
+      </div>
+
+      <!-- Interactive Book Content Area -->
+      <div class="book-container" id="bookContainer">
+        <div id="modalBody" class="book-pages-wrapper">
+          <!-- Active page content is rendered via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Book Navigation Controls -->
+      <div class="book-nav" id="bookNav">
+        <button id="prevPageBtn" onclick="changeBookPage(-1)">
+          <i class="fa-solid fa-arrow-left"></i> Prev
+        </button>
+        <span id="pageIndicator" class="page-number">Page 1 / 1</span>
+        <button id="nextPageBtn" onclick="changeBookPage(1)">
+          Next <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
     </div>
   </div>
 
