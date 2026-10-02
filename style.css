@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: #000000;
+  color: #cdd6f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #11111b;
+  border-bottom: 1px solid #181825;
+  z-index: 10;
+}
+
+.room-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #cba6f7;
+}
+
+.quick-links button {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border: 1px solid #313244;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 4px;
+}
+
+.quick-links button:hover {
+  background: #313244;
+}
+
+.game-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 10px;
+}
+
+/* Scaled down to 432px (4.5x scale) for desktop PC view */
+#gameCanvas {
+  width: 100%;
+  max-width: 432px;
+  max-height: 70vh;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #000000;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  #gameCanvas {
+    max-width: 88vw;
+    max-height: 65vh;
+  }
+}
+
+.prompt {
+  position: absolute;
+  bottom: 16px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #a6e3a1;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: 1px solid #a6e3a1;
+  z-index: 5;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Modal Styling */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.modal-content {
+  background: #181825;
+  border: 1px solid #cba6f7;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  color: #cdd6f4;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #f38ba8;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

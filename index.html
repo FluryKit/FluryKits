@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kovy's Interactive Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="room-title" id="roomTitle">Kovy's Room</div>
+    <div class="quick-links">
+      <button onclick="teleportToRoom(1)">Kovy's Room</button>
+      <button onclick="teleportToRoom(2)">Commission Room</button>
+    </div>
+  </header>
+
+  <!-- Game Canvas Container -->
+  <main class="game-container">
+    <canvas id="gameCanvas" width="96" height="96"></canvas>
+    
+    <!-- Onscreen Interaction Prompt -->
+    <div id="interactionPrompt" class="prompt hidden">Press [E] or Tap to Interact</div>
+  </main>
+
+  <!-- Pop-Up Modal Overlay -->
+  <div id="infoModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2 id="modalTitle">Modal Title</h2>
+      <div id="modalBody">
+        <p>Modal content goes here...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
